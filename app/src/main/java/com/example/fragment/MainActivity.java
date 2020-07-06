@@ -9,6 +9,9 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
+import com.example.fragment.factory.WidgetFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 // load First Fragment
-                loadFragment(new FirstFragment());
+//                loadFragment(new FirstFragment());
+
+
+              loadFragment(new FirstFragmentTes());
 
             }
         });
