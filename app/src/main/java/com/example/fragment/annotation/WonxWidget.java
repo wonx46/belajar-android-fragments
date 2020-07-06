@@ -15,6 +15,8 @@ public @interface WonxWidget {
 
   public JenisWidgetEnum widget();
 
+  public String id();
+
   public String text() default "";
 
   public String layout_width() default "wrap_content";
@@ -37,7 +39,9 @@ public @interface WonxWidget {
 
   public int background() default Color.GREEN;;
 
-  public String textStyle() default "bold";;
+  public String textStyle() default "bold";
+
+  public String onClick() default "";
 
 
 }

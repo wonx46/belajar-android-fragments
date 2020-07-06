@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fragment.component.CompButton;
 import com.example.fragment.factory.WidgetFactory;
 
 //import androidx.annotation.Nullable;
@@ -31,13 +32,24 @@ public class FirstFragmentTes extends Fragment {
 
 
       ObjFirstFragment tes = new ObjFirstFragment();
-      tes.setSampletext("Yuhuuu");
+      tes.setSampletext("Ya salam");
 
-//      linearLayout = new LinearLayout(view.getContext());
+
       linearLayout = WidgetFactory.createFragment(ObjFirstFragment.class, linearLayout,this, tes);
 
-
+      //get component
+        CompButton btn = (CompButton) WidgetFactory.getComponent("btnSample",linearLayout);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tesOnClick();
+            }
+        });
         return view;
+    }
+
+    public void tesOnClick(){
+        Toast.makeText(getActivity(), "First Fragment", Toast.LENGTH_LONG).show();
     }
 
   public void addComponent(View viewComp) {

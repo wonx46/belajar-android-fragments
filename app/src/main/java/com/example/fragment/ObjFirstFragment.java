@@ -7,12 +7,12 @@ import com.example.fragment.enumz.JenisWidgetEnum;
 
 public class ObjFirstFragment {
 
-  @WonxWidget(widget = JenisWidgetEnum.TEXTVIEW,text = "Ini Fragmen satu")
+  @WonxWidget(widget = JenisWidgetEnum.TEXTVIEW,id = "txtSample")
   private String sampletext;
 
-  @WonxWidget(widget = JenisWidgetEnum.BUTTON,text = "Fragmen satu", textColor = Color.WHITE, background = Color.DKGRAY)
+  @WonxWidget(widget = JenisWidgetEnum.BUTTON,id="btnSample",text = "Fragmen satu", textColor = Color.WHITE, background = Color.DKGRAY,
+  onClick = "FirstFragmentTes.tesOnClick")
   private String sampelbutton;
-
 
   public String getSampletext() {
     return sampletext;

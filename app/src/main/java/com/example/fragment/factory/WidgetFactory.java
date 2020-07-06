@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.fragment.R;
 import com.example.fragment.annotation.WonxWidget;
+import com.example.fragment.component.CompButton;
+import com.example.fragment.component.CompTextView;
 import com.example.fragment.enumz.JenisWidgetEnum;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 
 public class WidgetFactory {
@@ -49,9 +53,35 @@ return layout;
     return  null;
   }
 
-  private static TextView getGenerateText(WonxWidget ann,  Field field, Activity parent, Object obj) {
-    TextView t = new TextView(parent);
+  public static View getComponent(String idnya, ViewGroup parent){
 
+    for (int i = 0; i < parent.getChildCount(); i++) {
+
+      Object child = parent.getChildAt(i);
+      if(child instanceof  CompTextView){
+        CompTextView c = (CompTextView) child;
+        if(c.getIdnya().equalsIgnoreCase(idnya)){
+          return c;
+        }
+      }
+      if(child instanceof  CompButton){
+        CompButton c = (CompButton) child;
+        if(c.getIdnya().equalsIgnoreCase(idnya)){
+          return c;
+        }
+      }
+
+
+    }
+
+    return  null;
+  }
+
+
+
+  private static TextView getGenerateText(WonxWidget ann,  Field field, Activity parent, Object obj) {
+    CompTextView t = new CompTextView(parent);
+    t.setIdnya(ann.id());
     t.setTextColor(ann.textColor());
     t.setTextSize(TypedValue.COMPLEX_UNIT_SP, ann.textSize());
 
@@ -83,9 +113,9 @@ return layout;
     return t;
   }
 
-  private static Button getGenerateButton(WonxWidget ann, Field field, Activity parent, Object obj) {
-    Button t = new Button(parent);
-
+  private static CompButton getGenerateButton(WonxWidget ann, Field field, Activity parent, Object obj) {
+    CompButton t = new CompButton(parent);
+    t.setIdnya(ann.id());
     t.setTextColor(ann.textColor());
     t.setTextSize(TypedValue.COMPLEX_UNIT_SP, ann.textSize());
 
