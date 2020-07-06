@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.fragment.factory.WidgetFactory;
 
-import androidx.annotation.Nullable;
+//import androidx.annotation.Nullable;
 
 public class FirstFragmentTes extends Fragment {
 
@@ -33,7 +33,7 @@ public class FirstFragmentTes extends Fragment {
       ObjFirstFragment tes = new ObjFirstFragment();
       tes.setSampletext("Yuhuuu");
 
-      linearLayout = new LinearLayout(view.getContext());
+//      linearLayout = new LinearLayout(view.getContext());
       linearLayout = WidgetFactory.createFragment(ObjFirstFragment.class, linearLayout,this, tes);
 
 
@@ -43,22 +43,22 @@ public class FirstFragmentTes extends Fragment {
   public void addComponent(View viewComp) {
     this.linearLayout.addView(viewComp);
   }
-
-  @Nullable
-  @Override
-  public View getView() {
-    return view;
-  }
-
-  public void setView(View view) {
-    this.view = view;
-  }
-
-  public LinearLayout getLinearLayout() {
-    return linearLayout;
-  }
-
-  public void setLinearLayout(LinearLayout linearLayout) {
-    this.linearLayout = linearLayout;
-  }
+//
+//  @Nullable
+//  @Override
+//  public View getView() {
+//    return view;
+//  }
+//
+//  public void setView(View view) {
+//    this.view = view;
+//  }
+//
+//  public LinearLayout getLinearLayout() {
+//    return linearLayout;
+//  }
+//
+//  public void setLinearLayout(LinearLayout linearLayout) {
+//    this.linearLayout = linearLayout;
+//  }
 }
