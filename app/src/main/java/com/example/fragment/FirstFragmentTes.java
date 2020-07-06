@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.fragment.annotation.WonxWidget;
 import com.example.fragment.component.CompButton;
+import com.example.fragment.component.CompTextView;
 import com.example.fragment.factory.WidgetFactory;
 
 //import androidx.annotation.Nullable;
@@ -52,7 +53,12 @@ public class FirstFragmentTes extends Fragment {
     }
 
     public void tesOnClick(View view, WonxWidget ann, Activity parent){
-        Toast.makeText(parent.getApplicationContext(), "First Fragment", Toast.LENGTH_LONG).show();
+        // get component lain
+      CompTextView txt = (CompTextView) WidgetFactory.getComponent("txtSample", (ViewGroup) view.getParent());
+      if(txt != null){
+        Toast.makeText(parent.getApplicationContext(), txt.getText(), Toast.LENGTH_LONG).show();
+      }
+
     }
 
   public void addComponent(View viewComp) {
