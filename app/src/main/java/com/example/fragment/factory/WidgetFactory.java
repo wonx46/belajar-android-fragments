@@ -14,10 +14,12 @@ import com.example.fragment.R;
 import com.example.fragment.annotation.WonxWidget;
 import com.example.fragment.component.CompButton;
 import com.example.fragment.component.CompTextView;
+import com.example.fragment.enumz.JenisActionEnum;
 import com.example.fragment.enumz.JenisWidgetEnum;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
@@ -113,19 +115,11 @@ return layout;
     return t;
   }
 
-  private static CompButton getGenerateButton(WonxWidget ann, Field field, Activity parent, Object obj) {
-    CompButton t = new CompButton(parent);
+  private static CompButton getGenerateButton(final WonxWidget ann, Field field, final Activity parent, Object obj) {
+    final CompButton t = new CompButton(parent);
     t.setIdnya(ann.id());
     t.setTextColor(ann.textColor());
     t.setTextSize(TypedValue.COMPLEX_UNIT_SP, ann.textSize());
-
-//    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//      LinearLayout.LayoutParams.WRAP_CONTENT,
-//      LinearLayout.LayoutParams.WRAP_CONTENT
-//    );
-//    params.setMargins(left, top, right, bottom);
-//    t.setLayoutParams(params);
-
 
     ViewGroup.MarginLayoutParams params1 =
       new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -133,17 +127,44 @@ return layout;
     t.setText(ann.text());
     t.setBackgroundColor(ann.background());
 
-//    if(obj!=null){
-//      try {
-//        Object ox = PropertyUtils.getProperty(obj,name );
-//        if(ox!=null){
-//          t.setText((String) ox);
-//        }
-//      } catch (Exception e) {
-//        e.printStackTrace();
-//      }
-//    }
+    if(ann.classAction().length()>0 && ann.methodAction().length()>0){
+      if(ann.action().equals(JenisActionEnum.ON_CLICK)){
+        t.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            doActionComp(t, ann, parent);
+          }
+        });
+      }
+    }
 
     return t;
   }
+
+
+  protected static void doActionComp(View view, WonxWidget ann, Activity parent) {
+
+    try {
+      Class clazz       = Class.forName(ann.classAction());
+      Class[] param     = getParamsAction();
+      Object objFunc    = clazz.newInstance();
+
+      Method method     = clazz.getDeclaredMethod(ann.methodAction(),param);
+      method.invoke(objFunc, new Object[]{view, ann, parent});
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+
+  private static Class[] getParamsAction() {
+    Class[] param     = new Class[3];
+    param[0]          = View.class;
+    param[1]          = WonxWidget.class;
+    param[2]          = Activity.class;
+    return param;
+  }
+
+
 }

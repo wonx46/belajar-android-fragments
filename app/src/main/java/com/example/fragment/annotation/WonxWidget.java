@@ -2,6 +2,7 @@ package com.example.fragment.annotation;
 
 import android.graphics.Color;
 
+import com.example.fragment.enumz.JenisActionEnum;
 import com.example.fragment.enumz.JenisWidgetEnum;
 
 import java.lang.annotation.ElementType;
@@ -41,7 +42,9 @@ public @interface WonxWidget {
 
   public String textStyle() default "bold";
 
-  public String onClick() default "";
+  public JenisActionEnum action() default JenisActionEnum.ON_CLICK;
+  public String classAction() default "";
+  public String methodAction() default "";
 
 
 }

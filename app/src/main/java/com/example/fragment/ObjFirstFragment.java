@@ -10,8 +10,9 @@ public class ObjFirstFragment {
   @WonxWidget(widget = JenisWidgetEnum.TEXTVIEW,id = "txtSample")
   private String sampletext;
 
-  @WonxWidget(widget = JenisWidgetEnum.BUTTON,id="btnSample",text = "Fragmen satu", textColor = Color.WHITE, background = Color.DKGRAY,
-  onClick = "FirstFragmentTes.tesOnClick")
+  @WonxWidget(widget = JenisWidgetEnum.BUTTON,id="btnSample",text = "Fragmen satu",
+    textColor = Color.WHITE, background = Color.DKGRAY,
+  classAction = "com.example.fragment.FirstFragmentTes", methodAction = "tesOnClick")
   private String sampelbutton;
 
   public String getSampletext() {

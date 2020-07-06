@@ -1,5 +1,6 @@
 package com.example.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fragment.annotation.WonxWidget;
 import com.example.fragment.component.CompButton;
 import com.example.fragment.factory.WidgetFactory;
 
@@ -32,45 +34,29 @@ public class FirstFragmentTes extends Fragment {
 
 
       ObjFirstFragment tes = new ObjFirstFragment();
-      tes.setSampletext("Ya salam");
+      tes.setSampletext("hello automatic world");
 
 
       linearLayout = WidgetFactory.createFragment(ObjFirstFragment.class, linearLayout,this, tes);
 
       //get component
-        CompButton btn = (CompButton) WidgetFactory.getComponent("btnSample",linearLayout);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tesOnClick();
-            }
-        });
+//        CompButton btn = (CompButton) WidgetFactory.getComponent("btnSample",linearLayout);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                tesOnClick();
+//            }
+//        });
+
         return view;
     }
 
-    public void tesOnClick(){
-        Toast.makeText(getActivity(), "First Fragment", Toast.LENGTH_LONG).show();
+    public void tesOnClick(View view, WonxWidget ann, Activity parent){
+        Toast.makeText(parent.getApplicationContext(), "First Fragment", Toast.LENGTH_LONG).show();
     }
 
   public void addComponent(View viewComp) {
     this.linearLayout.addView(viewComp);
   }
-//
-//  @Nullable
-//  @Override
-//  public View getView() {
-//    return view;
-//  }
-//
-//  public void setView(View view) {
-//    this.view = view;
-//  }
-//
-//  public LinearLayout getLinearLayout() {
-//    return linearLayout;
-//  }
-//
-//  public void setLinearLayout(LinearLayout linearLayout) {
-//    this.linearLayout = linearLayout;
-//  }
+
 }
